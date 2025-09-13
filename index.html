@@ -1,20 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Day 4 - JS+AJAX +JSON</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8" />
+<title>Header with Image & Overlay Text</title>
+<style>
+* {
+margin: 0; padding: 0; box-sizing: border-box;
+}
+body {
+font-family: Arial, sans-serif;
+}
+header {
+background-color: #333;
+color: white;
+padding: 20px;
+}
+/* Container for logo image + overlay text */
+.logo-container {
+position: relative;
+width: 150px; /* Set width of logo area */
+cursor: pointer;
+}
+/* The logo image */
+.logo-container img {
+width: 100%;
+display: block;
+
+border-radius: 8px;
+}
+/* Overlay text on the image */
+.logo-text {
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+color: white;
+font-weight: bold;
+font-size: 20px;
+text-shadow: 2px 2px 5px black;
+pointer-events: none; /* So text doesn’t block clicks */
+}
+/* Header container using Flexbox */
+.header-container {
+display: flex;
+justify-content: space-between;
+align-items: center;
+flex-wrap: wrap;
+}
+/* Navigation styles */
+nav {
+display: flex;
+gap: 20px;
+}
+nav a {
+
+color: white;
+text-decoration: none;
+font-size: 18px;
+padding: 5px 8px;
+transition: background-color 0.3s ease;
+border-radius: 4px;
+}
+nav a:hover {
+background-color: #555;
+}
+/* Responsive: stack logo + nav vertically on small screens */
+@media (max-width: 600px) {
+.header-container {
+flex-direction: column;
+align-items: flex-start;
+gap: 15px;
+}
+nav {
+flex-direction: column;
+gap: 10px;
+width: 100%;
+}
+nav a {
+width: 100%;
+text-align: left;
+}
+}
+
+</style>
 </head>
 <body>
-    <section>
-        <h2>weather Info Fetcher</h2>
-        <input type="text" id="cityInput" placeholder="Enter city name">
-        <button id="fetchBtn">Get Weather</button>
-        <div id="weather"></div>
-
-    </section>
-
-    <script src="script.js"></script>
+<header>
+<div class="header-container">
+<!-- Logo with background image and overlay text -->
+<div class="logo-container">
+<img src="https://images.unsplash.com/photo-1506744038136-
+46273834b3fb?auto=format&fit=crop&w=150&q=80" alt="Logo
+Background" />
+<div class="logo-text">MyWebsite</div>
+</div>
+<!-- Navigation Bar -->
+<nav>
+<a href="#">Home</a>
+<a href="#">Courses</a>
+<a href="#">Contact</a>
+</nav>
+</div>
+</header>
 </body>
 </html>
