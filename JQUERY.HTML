@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editable To-Do List</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .list-item {
+            padding: 8px 12px;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out;
+            user-select: none;
+            border-radius: 0.5rem;
+        }
+        .list-item:hover {
+            background-color: #f3f4f6;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
+    <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-md">
+        <h1 class="text-3xl font-bold mb-6 text-gray-800 text-center">To-Do List</h1>
+        <ul id="todo-list" class="space-y-4">
+            <li class="list-item">Double-click to edit me!</li>
+            <li class="list-item">Buy groceries</li>
+            <li class="list-item">Finish the report</li>
+            <li class="list-item">Call a friend</li>
+        </ul>
+    </div>
+
+    <script>
+        const todoList = document.getElementById('todo-list');
+
+        todoList.addEventListener('dblclick', function(e) {
+            // Check if the double-click happened on a list item
+            const listItem = e.target.closest('li');
+            if (listItem && !listItem.querySelector('input')) {
+                const currentText = listItem.textContent;
+                const inputElement = document.createElement('input');
+                inputElement.type = 'text';
+                inputElement.value = currentText;
+                inputElement.className = 'w-full px-2 py-1 rounded-md border-2 border-blue-400 focus:outline-none focus:border-blue-600';
+
+                // Replace the list item's content with the input box
+                listItem.innerHTML = '';
+                listItem.appendChild(inputElement);
+                inputElement.focus();
+
+                // Function to save the changes
+                const saveChanges = () => {
+                    const newText = inputElement.value.trim();
+                    if (newText !== '') {
+                        listItem.textContent = newText;
+                    } else {
+                        // If the text is empty, revert to the original text
+                        listItem.textContent = currentText;
+                    }
+                };
+
+                // Listen for 'Enter' key press
+                inputElement.addEventListener('keydown', function(event) {
+                    if (event.key === 'Enter') {
+                        saveChanges();
+                    }
+                });
+
+                // Listen for blur event (clicking outside the input)
+                inputElement.addEventListener('blur', function() {
+                    saveChanges();
+                });
+            }
+        });
+    </script>
+</body>
+</html>
